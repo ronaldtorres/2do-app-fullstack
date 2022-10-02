@@ -1,0 +1,32 @@
+.todo-container {
+    display: flex;
+    align-items: center;
+    background-color: #b4cbe1;
+    margin: 6px 0px;
+    border-radius: 5px;
+}
+
+.todo-handler {
+    width: 30px;
+    position: relative;
+    z-index: 20;
+    line-height: 0.8rem;
+    padding: 12px 0px; 
+}
+
+@media screen and (min-width: 1024px) {
+
+    .todo-handler,
+    .todo-close {
+        opacity: 0;
+        pointer-events: none;
+        cursor: move;
+        transition: all 200ms ease;
+    }
+
+    .todo-container:hover .todo-handler,
+    .todo-container:hover .todo-close {
+        opacity: 1;
+        pointer-events: all;
+    }
+}

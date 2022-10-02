@@ -1,6 +1,6 @@
 export class TodoDto {
   description?: string;
-  sort: number;
+  sort?: number;
   completed?: boolean;
 
   constructor() {

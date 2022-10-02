@@ -19,8 +19,8 @@ export class TodoService {
     return await this.todos.destroy({ where: { uuid: id } });
   }
 
-  async update(id: string, data: TodoDto): Promise<number> {
-    return await this.todos.update(data, { where: { uuid: id } })[0];
+  async update(id: string, data: TodoDto): Promise<number[]> {
+    return await this.todos.update(data, { where: { uuid: id } });
   }
 
   async batchUpdate(todos: TodoBatchUpdateDto[]): Promise<number[]> {

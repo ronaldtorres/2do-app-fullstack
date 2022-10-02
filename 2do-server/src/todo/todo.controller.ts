@@ -44,8 +44,8 @@ export class TodoController {
   @Delete('/:id')
   async delete(@Param('id') id: string) {
     try {
-      const model = await this.todoService.delete(id);
-      return model;
+      const result = await this.todoService.delete(id);
+      return { status: !!result };
     } catch (e) {
       console.error(e);
       throw new HttpException('Cannot delete todo', 400);
@@ -55,20 +55,20 @@ export class TodoController {
   @Put('/:id')
   async update(@Param('id') id: string, @Body() data: TodoDto) {
     try {
-      const model = await this.todoService.update(id, data);
-      return model;
+      const result = await this.todoService.update(id, data);
+      return { status: !!result[0] };
     } catch (e) {
       console.error(e);
       throw new HttpException('Cannot update todo', 400);
     }
   }
 
-  @Patch('/batch')
+  @Post('/batch')
   async batchUpdate(@Body() data: TodoBatchUpdateDto[]) {
     try {
       const transaction = await this.todoService.batchUpdate(data);
       return {
-        done: transaction.some((v) => !v) === false,
+        status: transaction.some((v) => !v) === false,
       };
     } catch (e) {
       console.error(e);
